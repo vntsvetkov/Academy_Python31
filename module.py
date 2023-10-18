@@ -1,22 +1,18 @@
-""" День 1. Объектно-ориентированное программирование """
+""" День 1. Объектно-ориентированное программирование. Классы и объекты"""
 from copy import deepcopy
-"""
-Классы и объекты
-
-"""
 
 
 class Programmer:
 
     def __init__(self, name: str, age: int, iq: int, level: str,
                  languages: list[str]) -> None:
-        self.name = name
+        self.name: str = name
         if age < 18:
             raise ValueError("Возраст программиста не может быть меньше 18")
-        self.age = age
-        self.iq = iq
-        self.level = level
-        self.languages = deepcopy(languages)
+        self.age: int = age
+        self.iq: int = iq
+        self.level: str = level
+        self.languages: list[str] = deepcopy(languages)
 
     def __str__(self) -> str:
         return f"Имя: {self.name} \n" \
@@ -27,9 +23,9 @@ class Programmer:
 class Address:
 
     def __init__(self, city: str, street: str, home: int):
-        self.city = city
-        self.street = street
-        self.home = home
+        self.city: str = city
+        self.street: str = street
+        self.home: int = home
 
     def __str__(self):
         return f"г. {self.city}, ул. {self.street}, д. {self.home}"
