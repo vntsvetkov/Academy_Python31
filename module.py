@@ -126,6 +126,10 @@ class Car(Transport):
             self.__tank = self.__tank - distance * self.__consumption
 
 
+class CargoCar(Car):
+    ...
+
+
 class Bike(Transport):
     consumption: float = 2  # расход в л./км.
     status_engine = False  # состояние двигателя

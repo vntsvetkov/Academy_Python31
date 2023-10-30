@@ -1,6 +1,12 @@
 from module import *
 
 
+def trip(transport: Transport):
+    transport.start_engine()
+    transport.drive(10)
+    transport.stop_engine()
+
+
 def main():
 
     # rect = Rectangle(1, 2, 5, 6)
@@ -12,10 +18,7 @@ def main():
     #     print(f"Площадь фигуры {figure.name}: {figure.area()}")
 
     car = Car("BMW", 60)
-
-    car.start_engine()
-    car.drive(10)
-    car.stop_engine()
+    trip(car)
 
 
 if __name__ == "__main__":
