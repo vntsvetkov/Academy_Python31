@@ -2,6 +2,28 @@
 Многоуровневое и множественное наследование """
 
 from abc import ABC, abstractmethod
+import random
+
+
+class TrailerMixIn:
+
+    __capacity = 100
+
+    def add_cargo(self, cargo: int):
+        """ Добавить груз"""
+        self.__capacity -= cargo
+
+    @property
+    def capacity(self):
+        return self.__capacity
+
+
+class RadioMixIn:
+
+    __stations = ('Европа+', 'АвтоРадио')
+
+    def play_radio(self):
+        print(f"Вы слушаете радио {random.choice(self.__stations)}")
 
 
 class GroundTransport(ABC):
@@ -37,7 +59,7 @@ class Transport:
         raise NotImplementedError
 
 
-class FuelCar(GroundTransport, Transport):
+class FuelCar(GroundTransport, Transport, TrailerMixIn):
     __fuel_consumption: float = 0.1  # литра на км.
 
     def __init__(self, model, tank):
@@ -62,7 +84,7 @@ class FuelCar(GroundTransport, Transport):
         return self.__tank
 
 
-class ElectricCar(GroundTransport, Transport):
+class ElectricCar(GroundTransport, Transport, RadioMixIn):
     __battery_consumption: int = 210  # Ватт-час на км.
 
     def __init__(self, model, power):
