@@ -11,6 +11,7 @@ class TrailerMixIn:
 
     def add_cargo(self, cargo: int):
         """ Добавить груз"""
+        print(f"В прицеп загружено {cargo} кг.")
         self.__capacity -= cargo
 
     @property
@@ -20,10 +21,14 @@ class TrailerMixIn:
 
 class RadioMixIn:
 
-    __stations = ('Европа+', 'АвтоРадио')
+    __stations = {103.5: 'Европа+', 98.7: 'АвтоРадио'}
 
-    def play_radio(self):
-        print(f"Вы слушаете радио {random.choice(self.__stations)}")
+    @classmethod
+    def turn_radio(cls, station: float):
+        try:
+            print(f"Вы слушаете радио {cls.__stations[station]}")
+        except KeyError:
+            print(f"Радиостанция на частоте {station} не найдена")
 
 
 class GroundTransport(ABC):
@@ -34,7 +39,7 @@ class GroundTransport(ABC):
         ...
 
 
-class Transport:
+class Transport(GroundTransport):
     _mileage: float = 0  # начальный пробег равен 0
     _status_engine = False  # двигатель изначально выключен
 
@@ -59,7 +64,7 @@ class Transport:
         raise NotImplementedError
 
 
-class FuelCar(GroundTransport, Transport, TrailerMixIn):
+class FuelCar(Transport, TrailerMixIn, RadioMixIn):
     __fuel_consumption: float = 0.1  # литра на км.
 
     def __init__(self, model, tank):
@@ -84,7 +89,7 @@ class FuelCar(GroundTransport, Transport, TrailerMixIn):
         return self.__tank
 
 
-class ElectricCar(GroundTransport, Transport, RadioMixIn):
+class ElectricCar(Transport, RadioMixIn, TrailerMixIn):
     __battery_consumption: int = 210  # Ватт-час на км.
 
     def __init__(self, model, power):
