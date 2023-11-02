@@ -12,11 +12,13 @@ def main():
     car = FuelCar('ВАЗ 2109', 60)
     tesla = ElectricCar('Tesla Model X', 500)
 
-    car.add_cargo(50)
-    print(car.capacity)
+    # Загрузили в прицеп 50 кг
+    tesla.add_cargo(50)
 
-    tesla.play_radio()
+    # Включить радио на частоте 103.5
+    tesla.turn_radio(103.5)
 
+    # Отправиться в путешествие на 10 км
     trip(tesla, 10)
 
 
