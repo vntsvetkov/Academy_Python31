@@ -21,6 +21,13 @@ class Stack(object):
             raise StackIndexError("stack index out of range")
         return self._floors[floor_number]
 
+    def __delitem__(self, key):
+        if not isinstance(key, int):
+            raise TypeError("Индекс должен быть целым числом")
+        if len(self._floors) <= abs(key):
+            raise StackIndexError("stack index out of range")
+        del self._floors[key]
+
     def __len__(self):
         return len(self._floors)
 
@@ -29,6 +36,7 @@ class Stack(object):
 
     def __bool__(self):
         return len(self) != 0
+
 
 # Менеджер контекста
 class Timer:
@@ -61,6 +69,12 @@ class Clock:
 
     def to_seconds(self):
         return self.__hour * 3600 + self.__minute * 60 + self.__second
+
+    @staticmethod
+    def __validate_obj(other):
+        if not isinstance(other, (int, Clock)):
+            raise TypeError("Операнд справа должен иметь тип int или Clock")
+        return other if isinstance(other, int) else other.to_seconds()
 
     def __lt__(self, other):
         if isinstance(other, (Clock, int)):
