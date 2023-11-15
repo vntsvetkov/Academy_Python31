@@ -51,6 +51,7 @@ class Timer:
 
 class Clock:
     """ Класс, который хранит момент времени """
+    operation = None
 
     def __init__(self, h: int, m: int, s: int):
         self.__hour = h
@@ -73,17 +74,14 @@ class Clock:
     @staticmethod
     def __validate_obj(other):
         if not isinstance(other, (int, Clock)):
-            raise TypeError("Операнд справа должен иметь тип int или Clock")
+            raise TypeError(f"{Clock.operation} not supported between instances "
+                            f"of Clock and {other.__class__.__name__}")
         return other if isinstance(other, int) else other.to_seconds()
 
     def __lt__(self, other):
-        if isinstance(other, (Clock, int)):
-            if isinstance(other, int):
-                return self.to_seconds() < other
-            return self.to_seconds() < other.to_seconds()
-        else:
-            raise TypeError(f"'<' not supported between instances "
-                            f"of Clock and {other.__class__.__name__}")
+        Clock.operation = "<"
+        other = Clock.__validate_obj(other)
+        return self.to_seconds() < other
 
     def __le__(self, other):
         if isinstance(other, (Clock, int)):
