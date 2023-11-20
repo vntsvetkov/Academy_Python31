@@ -1,5 +1,4 @@
 from copy import copy, deepcopy
-import random
 
 """
 Взаимодействие между классами.
@@ -107,8 +106,36 @@ car.start()
 Агрегация - это когда экземпляр класса engine был создан где-то извне
 и передается в конструктор класса Car в качестве параметра.
 
-
-        2.2 Композиция. 
-
 """
 
+"""
+Принцип внедрения зависимостей (dependency injection)
+
+Способ 1. Внедрение через метод инициализации. 
+class Car:
+
+    def __init__(self, engine: Engine):
+        self.__engine = engine
+
+Способ 2. Внедрение через методы. (Method injection)
+
+class Car:
+    __engine: Engine
+    
+    def set_engine(self, engine: Engine):
+        self.__engine = engine
+    
+Способ 3. Внедрение через метод установки. (Field injection)
+
+class Car:
+    __engine: Engine
+
+    @property
+    def engine(self):
+        return self.__engine
+
+    @engine.setter
+    def engine(self, engine: Engine):
+        self.__engine = engine
+
+"""

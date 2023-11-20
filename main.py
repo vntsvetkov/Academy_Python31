@@ -1,5 +1,3 @@
-from module import *
-
 
 def main():
     ...
