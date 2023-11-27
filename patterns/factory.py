@@ -26,7 +26,7 @@ class Airplane(Transport):
         print("Доставка груза воздушным транспортом")
 
 
-class Delivery:
+class Delivery(ABC):
 
     @abstractmethod
     def create_transport(self, id_transport):

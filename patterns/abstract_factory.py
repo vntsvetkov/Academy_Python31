@@ -63,7 +63,7 @@ class IOSSetFactory(MobilePhoneFactory):
         return LightingCharger()
 
     def create_headphones(self):
-        return AndroidPhone()
+        return Airpods()
 
 
 class AndroidSetFactory(MobilePhoneFactory):
