@@ -11,8 +11,9 @@ import pandas
 
 class DBSqliteWorker:
 
-    def connect(self) -> sqlite3.Connection:
-        ...
+    def connect(self, table_name: str) -> sqlite3.Connection:
+        con = sqlite3.connect(table_name)
+        return con
 
     def get_data(self):
         ...
@@ -23,8 +24,10 @@ class DBSqliteWorker:
 
 class PandasWorker:
 
-    def create_dataframe(self, data: dict) -> pandas.DataFrame:
-        ...
+    df: pandas.DataFrame
+
+    def create_dataframe(self, data: dict):
+        self.df = pandas.DataFrame(data)
 
     def get_data(self):
         ...
@@ -32,8 +35,8 @@ class PandasWorker:
     def insert_data(self):
         ...
 
-    def to_sql(self, conn: sqlite3.Connection):
-        ...
+    def to_sql(self, table_name: str, conn: sqlite3.Connection):
+        self.df.to_sql(table_name, conn)
 
 
 class DBFacade:
@@ -42,15 +45,15 @@ class DBFacade:
         self.__pd = pd
         self.__db = db
 
-    def from_dataframe_to_db(self, data: dict):
+    def from_dataframe_to_db(self, table_name: str, data: dict):
         """ Считать данные из dataframe в БД"""
         self.__pd.create_dataframe(data)
-        conn = self.__db.connect()
-        self.__pd.to_sql(conn)
+        conn = self.__db.connect(table_name)
+        self.__pd.to_sql(table_name, conn)
 
 
 facade = DBFacade(DBSqliteWorker(), PandasWorker())
-facade.from_dataframe_to_db({
+facade.from_dataframe_to_db("user.db", {
     "id": [5, 6],
     "name": ["John", "James"],
     "age": [41, 55]
