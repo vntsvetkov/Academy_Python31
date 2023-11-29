@@ -11,6 +11,7 @@ from abc import ABC, abstractmethod
 
 
 class SystemObject(ABC):
+    type = "Объект системы"
 
     @abstractmethod
     def get_name(self):
@@ -20,8 +21,13 @@ class SystemObject(ABC):
     def get_size(self):
         ...
 
+    @abstractmethod
+    def get_data(self):
+        ...
+
 
 class File(SystemObject):
+    type = "Файл"
 
     def __init__(self, name: str, size: int):
         self.__name = name
@@ -33,8 +39,12 @@ class File(SystemObject):
     def get_size(self):
         return self.__size
 
+    def get_data(self):
+        ...
+
 
 class Directory(SystemObject):
+    type = "Директория"
 
     def __init__(self, name: str):
         self.__name = name
@@ -55,10 +65,6 @@ class Directory(SystemObject):
             size += element.get_size()
         return size
 
-    def get_data(self):
-        for i in self.__files:
-            yield i
-
 
 file1 = File("Документ 1", 116)
 file2 = File("Документ 2", 118)
@@ -73,7 +79,3 @@ directory2.add(directory1)
 directory2.add(file3)
 
 print(directory2.get_size())
-
-for element in directory2.get_data():
-    print(element.get_name())
-
