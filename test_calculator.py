@@ -2,6 +2,7 @@ from calculator import Calculator
 import unittest
 import time
 
+
 class TestCalculator(unittest.TestCase):
 
     def setUp(self) -> None:
