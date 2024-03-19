@@ -1,8 +1,11 @@
 Репозиторий для хранения исходного кода группы Academy_Python31
 
-Туториал https://www.pythontutorial.net/python-oop/
-Статья 1. ООП в python https://python-scripts.com/object-oriented-programming-in-python
-Статья 2. ООП в python https://realpython.com/python3-object-oriented-programming/
+  Туториал: https://www.pythontutorial.net/python-oop/
+  
+  Статья 1. ООП в python: https://python-scripts.com/object-oriented-programming-in-python
+  
+  Статья 2. ООП в python: https://realpython.com/python3-object-oriented-programming/
+
 День 1. Классы и объекты
 
   https://docs-python.ru/tutorial/klassy-jazyke-python/obekt-klassa/
